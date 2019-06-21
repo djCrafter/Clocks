@@ -8,7 +8,8 @@
              x:Class="Clocks.Views.ClockPage">
    
     <StackLayout>
-        <local:Clock x:Name="clock"
+        <Button Text="Сохранить" Command="{Binding ListViewModel.SaveClockCommand}" CommandParameter="{Binding}"/>
+        <local:Clock x:Name="mainClock"
                      Margin="0, 50, 0, 0"
                      HorizontalOptions="Center"
                      VerticalOptions="Start"

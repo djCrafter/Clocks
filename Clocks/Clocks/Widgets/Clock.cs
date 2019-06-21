@@ -7,7 +7,7 @@ using SkiaSharp.Views.Forms;
 
 namespace Clocks.Widgets
 {
-    class Clock : SKCanvasView
+    public class Clock : SKCanvasView
     {
         private SKColor headColor;
         private SKColor clockFaceColor;
@@ -73,13 +73,27 @@ namespace Clocks.Widgets
 
         public Clock()
         {
+            StartClock();
+        }
+
+        public Clock(Color headColor, Color clockFaceColor, TimeZoneInfo clockTimeZoneInfo)
+        {
+            HeadColor = headColor;
+            ClockFaceColor = clockFaceColor;
+            ClockTimeZoneInfo = clockTimeZoneInfo;
+
+            StartClock();
+        }
+
+
+        private void StartClock()
+        {
             Device.StartTimer(TimeSpan.FromSeconds(1f), () =>
             {
                 InvalidateSurface();
                 return true;
             });
         }
-
 
         protected override void OnPaintSurface(SKPaintSurfaceEventArgs e)
         {
