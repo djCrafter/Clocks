@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:Clocks.Widgets"
+             mc:Ignorable="d"
+             x:Class="Clocks.Views.ClockPage">
+    <ContentPage.Resources>
+        <local:TimeZoneConverter x:Key="TimeZoneConverter" />
+    </ContentPage.Resources>
+    <StackLayout>
+        <local:Clock x:Name="clock"
+                     HorizontalOptions="Center"
+                     VerticalOptions="CenterAndExpand"
+                     WidthRequest="200"
+                     HeightRequest="200"
+                     HeadColor="{Binding ClockHeadColor, Mode=TwoWay}"
+                     ClockFaceColor="{Binding ClockFaceColor, Mode=TwoWay}"
+                     ClockTimeZoneInfo="{Binding ClockTimeZoneInfo}"
+                     />
+        <Picker Title="Изменить цвет стрелок"                
+                    ItemsSource="{Binding Colors, Mode=OneWay}"
+                    SelectedItem="{Binding ClockHeadSelected, Mode=TwoWay}"/>
+
+        <Picker Title="Изменить цвет циферблата"
+                    ItemsSource="{Binding Colors, Mode=OneWay}"
+                    SelectedItem="{Binding ClockFaceSelected, Mode=TwoWay}"/>
+        
+        <Picker Title="Выберите TimeZone"
+                    ItemsSource="{Binding timeZonesList}"
+                    SelectedItem="{Binding TimeZoneSelected, Mode=TwoWay}"
+                    />
+    </StackLayout>
+   
+</ContentPage>
