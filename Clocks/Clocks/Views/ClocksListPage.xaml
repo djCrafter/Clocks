@@ -12,11 +12,23 @@
               SelectedItem="{Binding SelectedFriend, Mode=TwoWay}" HasUnevenRows="True">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <ViewCell>
+                    <ViewCell Height="100">
                         <ViewCell.View>
-                            <StackLayout>
-                                <local:Clock/>
-                            </StackLayout>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="3*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Text="{Binding ClockTimeZone.DisplayName}" Grid.Column="0" 
+                                       VerticalTextAlignment="Center"
+                                       FontSize="Medium"/>
+                                <local:Clock
+                                    Grid.Column="1"
+                                    HeadColor="{Binding HeadColor}"
+                                    ClockFaceColor="{Binding FaceColor}"
+                                    ClockTimeZoneInfo="{Binding ClockTimeZone}"                                   
+                                    />
+                            </Grid>
                         </ViewCell.View>
                     </ViewCell>
                 </DataTemplate>

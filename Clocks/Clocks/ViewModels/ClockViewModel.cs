@@ -15,6 +15,7 @@ namespace Clocks.ViewModels
     {
         public ClockViewModel()
         {
+           
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

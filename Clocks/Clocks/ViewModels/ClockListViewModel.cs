@@ -7,12 +7,13 @@ using Xamarin.Forms;
 using Clocks.Views;
 using System.Windows.Input;
 using Clocks.Widgets;
+using Clocks.Models;
 
 namespace Clocks.ViewModels
 {
     public class ClockListViewModel : INotifyPropertyChanged
     {
-        public ObservableCollection<Clock> Clocks { get; set; }
+        public ObservableCollection<ClockModel> Clocks { get; set; }
         Clock selectedClock;
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -26,7 +27,7 @@ namespace Clocks.ViewModels
 
         public ClockListViewModel()
         {
-            Clocks = new ObservableCollection<Clock>();
+            Clocks = new ObservableCollection<ClockModel>();
             CreateClockCommand = new Command(CreateClock);
             SaveClockCommand = new Command(SaveClock);
             BackCommand = new Command(Back);
@@ -44,11 +45,16 @@ namespace Clocks.ViewModels
 
         private void SaveClock(object clockObject)
         {
-            //ClockViewModel cvm = clockObject as ClockViewModel;
-            //if(cvm != null)
-            //{
-            //    Clocks.Add(new Clock(cvm.clockHeadColor, cvm.clockFaceColor, cvm.ClockTimeZoneInfo));
-            //}
+            ClockViewModel cvm = clockObject as ClockViewModel;
+            if (cvm != null)
+            {
+                Clocks.Add(new ClockModel()
+                {
+                    HeadColor = cvm.ClockHeadColor,
+                    FaceColor = cvm.ClockFaceColor,
+                    ClockTimeZone = cvm.ClockTimeZoneInfo
+                });
+            }
 
             Back();
         } 
