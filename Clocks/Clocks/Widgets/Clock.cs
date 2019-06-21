@@ -11,7 +11,7 @@ namespace Clocks.Widgets
     {
         private SKColor headColor;
         private SKColor clockFaceColor;
-        private TimeZoneInfo timeZoneInfo = TimeZoneInfo.Local;
+        private TimeZoneInfo timeZoneInfo;
 
         public static readonly BindableProperty HeadColorProperty =
           BindableProperty.Create(nameof(HeadColor), typeof(Color), typeof(Clock), Color.White,
@@ -29,7 +29,7 @@ namespace Clocks.Widgets
               thisControl.ClockFaceColor = (Color)newValue;
           });
 
-        public static readonly BindableProperty TimeZoneProperty =
+        public static readonly BindableProperty ClockTimeZoneInfoProperty =
           BindableProperty.Create(nameof(ClockTimeZoneInfo), typeof(TimeZoneInfo), typeof(Clock),
           propertyChanging: (currentControl, oldValue, newValue) =>
           {
@@ -40,10 +40,10 @@ namespace Clocks.Widgets
 
         public TimeZoneInfo ClockTimeZoneInfo
         {
-            get { return (TimeZoneInfo)GetValue(TimeZoneProperty); }
+            get { return (TimeZoneInfo)GetValue(ClockTimeZoneInfoProperty); }
             set
             {
-                SetValue(TimeZoneProperty, value);
+                SetValue(ClockTimeZoneInfoProperty, value);
                 timeZoneInfo = value;
                 InvalidateSurface();
             }
@@ -129,8 +129,6 @@ namespace Clocks.Widgets
                 canvas.RotateDegrees(6);
             }
         }
-
-
 
         private void DrawHands(SKCanvas canvas, int width, DateTime dateTime)
         {

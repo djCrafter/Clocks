@@ -10,12 +10,11 @@ using Xamarin.Forms;
 
 namespace Clocks.ViewModels
 {
-   
 
     public class ClockViewModel : INotifyPropertyChanged
-    {       
+    {
         public ClockViewModel()
-        {                      
+        {
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -33,22 +32,21 @@ namespace Clocks.ViewModels
             { "White", Color.WhiteSmoke}, {"Yellow", Color.Yellow }
         };
 
-     
-        
 
         public List<string> Colors { get; } = colors.Keys.ToList();
         public ReadOnlyCollection<TimeZoneInfo> timeZonesList { get; } = TimeZoneInfo.GetSystemTimeZones();
 
         public Color clockHeadColor = Color.WhiteSmoke;
         public Color clockFaceColor = Color.Black;
-        public TimeZoneInfo clockTimeZoneInfo;
+        public TimeZoneInfo clockTimeZoneInfo = TimeZoneInfo.Local;
 
         private string clockHeadSelected;
         private string clockFaceSelected;
 
         public ICommand CallPickerCommand { protected set; get; }
 
-        public string ClockHeadSelected {
+        public string ClockHeadSelected
+        {
             get { return clockHeadSelected; }
             set
             {
@@ -72,11 +70,10 @@ namespace Clocks.ViewModels
             get { return clockTimeZoneInfo; }
             set
             {
-                clockTimeZoneInfo = value;
                 ClockTimeZoneInfo = value;
             }
         }
-           
+
 
         public ClockListViewModel ListViewModel
         {
@@ -137,6 +134,6 @@ namespace Clocks.ViewModels
                 PropertyChanged(this, new PropertyChangedEventArgs(propName));
         }
 
-    
+
     }
 }
