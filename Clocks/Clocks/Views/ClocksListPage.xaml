@@ -5,7 +5,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:local="clr-namespace:Clocks.Widgets"
              mc:Ignorable="d"
-             x:Class="Clocks.Views.ClocksListPage" Title="Список часов">
+             x:Class="Clocks.Views.ClocksListPage" 
+             NavigationPage.HasBackButton="False"
+             Title="Список часов">
     <StackLayout>
         <Button Text="Добавить Часы" Command="{Binding CreateClockCommand}" />
         <ListView x:Name="clockList" ItemsSource="{Binding Clocks}"

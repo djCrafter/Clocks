@@ -23,7 +23,7 @@ namespace Clocks.Views
                 this.saveButton.Text = "Редактировать";
 
             viewModel = vm;
-            BindingContext = viewModel;
+            BindingContext = viewModel;         
         }
 
        
