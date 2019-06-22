@@ -6,21 +6,27 @@ using System.Linq;
 using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
+using Clocks.Models;
 
 
 namespace Clocks.ViewModels
 {
 
     public class ClockViewModel : INotifyPropertyChanged
-    {
-        public ClockViewModel()
-        {
-           
-        }
+    {      
+        private ClockListViewModel cvm;
+        private Color clockHeadColor = Color.WhiteSmoke;
+        private Color clockFaceColor = Color.Black;
+        private TimeZoneInfo clockTimeZoneInfo = TimeZoneInfo.Local;
+        private string clockHeadSelected;
+        private string clockFaceSelected;
 
         public event PropertyChangedEventHandler PropertyChanged;
-        ClockListViewModel cvm;
+        public bool editingMode = false;
+        public ClockModel selectedClock;
 
+        public List<string> Colors { get; } = colors.Keys.ToList();
+        public ReadOnlyCollection<TimeZoneInfo> timeZonesList { get; } = TimeZoneInfo.GetSystemTimeZones();
         static Dictionary<string, Color> colors { get; } = new Dictionary<string, Color>
         {
             { "Aqua", Color.Aqua }, {"Black", Color.Black },
@@ -33,19 +39,19 @@ namespace Clocks.ViewModels
             { "White", Color.WhiteSmoke}, {"Yellow", Color.Yellow }
         };
 
-
-        public List<string> Colors { get; } = colors.Keys.ToList();
-        public ReadOnlyCollection<TimeZoneInfo> timeZonesList { get; } = TimeZoneInfo.GetSystemTimeZones();
-
-        public Color clockHeadColor = Color.WhiteSmoke;
-        public Color clockFaceColor = Color.Black;
-        public TimeZoneInfo clockTimeZoneInfo = TimeZoneInfo.Local;
-
-        private string clockHeadSelected;
-        private string clockFaceSelected;
-
-        public ICommand CallPickerCommand { protected set; get; }
-
+        public ClockViewModel(ClockModel cm)
+        {
+            if(cm != null)
+            {
+                editingMode = true;
+                selectedClock = cm;
+               
+                ClockHeadColor = selectedClock.HeadColor;
+                clockFaceColor = selectedClock.FaceColor;
+                clockTimeZoneInfo = selectedClock.ClockTimeZone;               
+            }          
+        }
+     
         public string ClockHeadSelected
         {
             get { return clockHeadSelected; }
@@ -74,7 +80,6 @@ namespace Clocks.ViewModels
                 ClockTimeZoneInfo = value;
             }
         }
-
 
         public ClockListViewModel ListViewModel
         {
@@ -128,13 +133,10 @@ namespace Clocks.ViewModels
             }
         }
 
-
         protected void OnPropertyChanged(string propName)
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(propName));
         }
-
-
     }
 }
