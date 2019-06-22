@@ -111,10 +111,8 @@ namespace Clocks.Widgets
             canvas.Translate(width / 2, height / 2);
             canvas.Scale(width / 210f, height / 210f);
 
-            dateTime = TimeZoneInfo.ConvertTime(dateTime, timeZoneInfo);
-            //timeZoneLabel.Text = tz[zone].Id;
-
-
+            dateTime = TimeZoneInfo.ConvertTime(dateTime, timeZoneInfo == null ? TimeZoneInfo.Local : timeZoneInfo);
+           
             SKPaint backFillPaint = new SKPaint
             {
                 Style = SKPaintStyle.Fill,

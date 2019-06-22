@@ -9,7 +9,8 @@
     <StackLayout>
         <Button Text="Добавить Часы" Command="{Binding CreateClockCommand}" />
         <ListView x:Name="clockList" ItemsSource="{Binding Clocks}"
-              SelectedItem="{Binding SelectedClock, Mode=TwoWay}" HasUnevenRows="True">
+              SelectedItem="{Binding SelectedClock, Mode=TwoWay}" HasUnevenRows="True"
+                  SeparatorVisibility="None">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell Height="100">
