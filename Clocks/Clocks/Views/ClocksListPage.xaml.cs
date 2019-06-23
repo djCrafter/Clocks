@@ -13,11 +13,13 @@ namespace Clocks.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ClocksListPage : ContentPage
     {
-        public ClocksListPage()
+        public ClocksListPage(INavigation navigation)
         {
             InitializeComponent();
 
-            BindingContext = new ClockListViewModel() { Navigation = this.Navigation };
+            BindingContext = new ClockListViewModel() { Navigation = navigation };
         }
+
+   
     }
 }

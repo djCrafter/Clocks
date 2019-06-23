@@ -13,13 +13,12 @@ namespace Clocks.ViewModels
 {
     public class ClockListViewModel : INotifyPropertyChanged
     {
+        private int currentUserId = 0;
+
         public ObservableCollection<ClockModel> Clocks { get; set; }
         ClockModel selectedClock;
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public INavigation Navigation { get; set; }
-
+           
+        public INavigation Navigation { get; set; }    
         public ICommand CreateClockCommand { protected set; get; }
         public ICommand SaveClockCommand { protected set; get; }
         public ICommand BackCommand { protected set; get; }
@@ -31,9 +30,11 @@ namespace Clocks.ViewModels
             CreateClockCommand = new Command(CreateClock);
             SaveClockCommand = new Command(SaveClock);
             BackCommand = new Command(Back);
+
+            GetCurrentUserId();
+            GetClocksFromDB();
         }
-
-
+      
         public ClockModel SelectedClock
         {
             get { return selectedClock; }
@@ -48,7 +49,7 @@ namespace Clocks.ViewModels
                 }
             }
         }
-
+        
         private void CreateClock()
         {
             Navigation.PushAsync(new ClockPage(new ClockViewModel(null) { ListViewModel = this }, true));
@@ -74,21 +75,48 @@ namespace Clocks.ViewModels
                         FaceColor = cvm.ClockFaceColor,
                         ClockTimeZone = cvm.ClockTimeZoneInfo
                     });
+                    UpdateDB();
                 }
                 else
                 {
-                    Clocks.Add(new ClockModel()
+                    var newClock = new ClockModel()
                     {
                         HeadColor = cvm.ClockHeadColor,
                         FaceColor = cvm.ClockFaceColor,
                         ClockTimeZone = cvm.ClockTimeZoneInfo
-                    });
-                }              
-            }
+                    };
 
+                    Clocks.Add(newClock);
+                    App.Database.AddClock(newClock, currentUserId);                    
+                }               
+            }
             Back();
         }
 
+        private void UpdateDB()
+        {
+            List<ClockModel> clockModels = new List<ClockModel>();
+            clockModels.AddRange(Clocks);
+            App.Database.UpdateClockListAsync(clockModels, currentUserId);
+        }
+
+        private void GetCurrentUserId()
+        {
+            object login = "";
+            App.Current.Properties.TryGetValue("Login", out login);
+            currentUserId = App.Database.GetUserId((string)login);
+        }
+
+        private void GetClocksFromDB()
+        {
+            var list = App.Database.GetClocks(currentUserId);
+            foreach (var item in list)
+            {
+                Clocks.Add(item);
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string propName)
         {
             if (PropertyChanged != null)

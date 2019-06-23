@@ -20,11 +20,9 @@ namespace Clocks.ViewModels
         private TimeZoneInfo clockTimeZoneInfo = TimeZoneInfo.Local;
         private string clockHeadSelected;
         private string clockFaceSelected;
-
-        public event PropertyChangedEventHandler PropertyChanged;
+        
         public bool editingMode = false;
         public ClockModel selectedClock;
-
         public List<string> Colors { get; } = colors.Keys.ToList();
         public ReadOnlyCollection<TimeZoneInfo> timeZonesList { get; } = TimeZoneInfo.GetSystemTimeZones();
         static Dictionary<string, Color> colors { get; } = new Dictionary<string, Color>
@@ -133,6 +131,7 @@ namespace Clocks.ViewModels
             }
         }
 
+        public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string propName)
         {
             if (PropertyChanged != null)

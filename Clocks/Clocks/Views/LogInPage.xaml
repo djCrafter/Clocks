@@ -7,9 +7,9 @@
              x:Class="Clocks.Views.LogInPage">
     <ContentPage.Content>
         <StackLayout>
-            <Entry/>
-            <Entry/>
-            <Button Text="LOG IN"/>
+            <Entry Text="{Binding Login}"/>
+            <Entry Text="{Binding Password}"/>
+            <Button Text="LOG IN" Command="{Binding LogInCommand}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

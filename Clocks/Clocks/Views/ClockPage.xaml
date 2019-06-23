@@ -4,12 +4,12 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:local="clr-namespace:Clocks.Widgets"
-             mc:Ignorable="d"           
+             mc:Ignorable="d"
+             Title="Create Clock"
              x:Class="Clocks.Views.ClockPage">
-   
     <StackLayout>
         <Button x:Name="saveButton"
-            Text="Сохранить" Command="{Binding ListViewModel.SaveClockCommand}" CommandParameter="{Binding}"/>
+            Text="SAVE" Command="{Binding ListViewModel.SaveClockCommand}" CommandParameter="{Binding}"/>
         <local:Clock x:Name="mainClock"
                      Margin="0, 50, 0, 0"
                      HorizontalOptions="Center"
@@ -20,19 +20,15 @@
                      ClockFaceColor="{Binding ClockFaceColor, Mode=TwoWay}"
                      ClockTimeZoneInfo = "{Binding ClockTimeZoneInfo, Mode=TwoWay}"
                      />
-        <Picker Title="Изменить цвет стрелок"                     
+        <Picker Title="Select heads color"                     
                     VerticalOptions="Center"
                     Margin="0, 100, 0, 0"
                     ItemsSource="{Binding Colors, Mode=OneWay}"
                     SelectedItem="{Binding ClockHeadSelected, Mode=TwoWay}"/>
-
-        <Picker Title="Изменить цвет циферблата"
-                  
+        <Picker Title="Select face color"                 
                     ItemsSource="{Binding Colors, Mode=OneWay}"
                     SelectedItem="{Binding ClockFaceSelected, Mode=TwoWay}"/>
-
-        <Picker Title="Выберите TimeZone"
-                    
+        <Picker Title="Select TimeZone"                   
                     ItemsSource="{Binding timeZonesList}"
                     SelectedItem="{Binding TimeZoneSelected, Mode=TwoWay}"
                     />

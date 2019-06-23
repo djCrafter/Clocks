@@ -2,7 +2,9 @@
 using Xamarin.Forms;
 using System.IO;
 using Clocks.Services;
+using Clocks.iOS;
 
+[assembly: Dependency(typeof(SQLite_iOS))]
 namespace Clocks.iOS
 {
     public class SQLite_iOS : ISQLite

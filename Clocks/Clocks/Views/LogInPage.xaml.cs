@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Clocks.ViewModels;
 
 namespace Clocks.Views
 {
@@ -16,7 +17,7 @@ namespace Clocks.Views
         {
             InitializeComponent();
 
-
-        }
+            BindingContext = new LogInViewModel(Navigation);
+        }      
     }
 }

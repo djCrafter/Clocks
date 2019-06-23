@@ -20,8 +20,10 @@ namespace Clocks.Views
             InitializeComponent();
 
             if (!saveButton)
-                this.saveButton.Text = "Редактировать";
-
+            {
+                Title = "Edit Clock";
+                this.saveButton.Text = "Edit";
+            }
             viewModel = vm;
             BindingContext = viewModel;         
         }
