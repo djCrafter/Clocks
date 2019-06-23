@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
 using Clocks.Models;
@@ -13,6 +11,7 @@ namespace Clocks.ViewModels
     {
         private string login;
         private string password;
+        private string message;
         public ICommand LogInCommand { protected set; get; }
         public INavigation Navigation {get; set;}
                          
@@ -47,20 +46,35 @@ namespace Clocks.ViewModels
                 }
             }
         }
-            
-        private void LogIn()
-        {
-            DBUser user = App.Database.GetUser(1);
 
-            Console.WriteLine();
+        public string Message
+        {
+            get { return message; }
+            set
+            {
+                if (message != value)
+                {
+                    message = value;
+                    OnPropertyChanged(nameof(Message));
+                }
+            }
+        }
+        private void LogIn()
+        {                             
             if (App.Database.LogIn(login, password))
             {
+                Message = "";
                 App.Current.Properties["Login"] = login;
                 App.Current.Properties["Password"] = password;
 
                 Navigation.PushAsync(new ClocksListPage(Navigation));
             }
+            else
+            {
+                Message = "Wrong login or password!!!";
+            }
         }
+ 
         private void AutoLogIn()
         {
             object login = "";
@@ -74,7 +88,6 @@ namespace Clocks.ViewModels
                 }
             }
         }
-
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string propName)

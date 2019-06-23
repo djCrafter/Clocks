@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Xamarin.Forms;
-using System.Text;
+﻿using Xamarin.Forms;
 
 namespace Clocks.Services
 {

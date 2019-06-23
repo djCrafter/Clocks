@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using SQLiteNetExtensions.Attributes;
 using SQLiteNetExtensions.Extensions;
-using System.Text;
-using System.Linq;
 using Xamarin.Forms;
 using SQLite;
 using Clocks.Models;
-using System.Threading.Tasks;
 
 namespace Clocks.Services
 {
@@ -51,8 +47,8 @@ namespace Clocks.Services
                 };
                 DBUser user2 = new DBUser()
                 {
-                    Login = "Vaso",
-                    Password = "Rubenovich"
+                    Login = "User",
+                    Password = "54321"
                 };
 
                 database.Insert(user1);

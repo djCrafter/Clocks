@@ -7,9 +7,12 @@
              x:Class="Clocks.Views.LogInPage">
     <ContentPage.Content>
         <StackLayout>
-            <Entry Text="{Binding Login}"/>
-            <Entry Text="{Binding Password}"/>
+            <Label Text="MockUser1 -- Login: Admin   Pass: 12345" HorizontalTextAlignment="Center"/>
+            <Label Text="MockUser2 -- Login: User   Pass: 54321" HorizontalTextAlignment="Center"/>
+            <Entry Text="{Binding Login}" Margin="0, 100, 0, 0"/>
+            <Entry Text="{Binding Password}" IsPassword="True"/>
             <Button Text="LOG IN" Command="{Binding LogInCommand}"/>
+            <Label Text="{Binding Message}" HorizontalTextAlignment="Center" TextColor="Red"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

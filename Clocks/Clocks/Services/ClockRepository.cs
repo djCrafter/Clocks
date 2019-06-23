@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using SQLiteNetExtensions.Attributes;
 using SQLiteNetExtensions.Extensions;
-using System.Text;
 using System.Linq;
 using Xamarin.Forms;
 using SQLite;

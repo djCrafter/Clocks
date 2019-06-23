@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Text;
 using Xamarin.Forms;
 using Clocks.Views;
 using System.Windows.Input;
-using Clocks.Widgets;
 using Clocks.Models;
 
 namespace Clocks.ViewModels
