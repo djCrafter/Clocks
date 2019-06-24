@@ -25,20 +25,7 @@ namespace Clocks.Services
         {
             return (from i in database.Table<DBUser>() select i).ToList();
         }
-
-        public int SaveItem(DBUser item)
-        {
-            if (item.Id != 0)
-            {
-                database.Update(item);
-                return item.Id;
-            }
-            else
-            {
-                return database.Insert(item);
-            }
-        }
-
+      
         public bool LogIn(string login, string password)
         {
             var userLog = from p in database.Table<DBUser>()
@@ -84,11 +71,11 @@ namespace Clocks.Services
         }
 
         public async void UpdateClockListAsync(List<ClockModel> clockList, int id)
-        {
-            ClearClockList(id);
-
+        {         
             await Task.Run(() =>
             {
+                ClearClockList(id);
+
                 foreach (var item in clockList)
                 {
                     AddClock(item, id);
@@ -116,8 +103,7 @@ namespace Clocks.Services
                 };
                 database.Insert(dBClock);
                 user.Clocks.Add(dBClock);
-                database.UpdateWithChildren(user);
-         
+                database.UpdateWithChildren(user);         
         }      
     }
 }
